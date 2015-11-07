@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<title>Urna Eletronica</title>
+	</head>
+	<body>
+		<center>
+			<h1>Urna Eletronica </h1>
+			<form action="" method="GET">
+				<textarea><?php 
+				session_start();
+				$numero=$_GET['digito'];
+				$_SESSION['visor']=$_SESSION['visor'].$tela;
+				$tela=$_SESSION['visor'];
+				echo $tela;
+				?> </textarea>
+				<br/>
+					<table border=0>
+					<tr> 
+						<td><input type="submit" name="digito" value="1"></td>
+						<td><input type="submit" name="digito" value="2"></td>
+						<td><input type="submit" name="digito" value="3"></td>
+					</tr>
+					<tr>
+						<td><input type="submit" name="digito" value="4"></td>
+						<td><input type="submit" name="digito" value="5"></td>
+						<td><input type="submit" name="digito" value="6"></td>
+					</tr>
+					<tr>
+						<td><input type="submit" name="digito" value="7"></td>
+						<td><input type="submit" name="digito" value="8"></td>
+						<td><input type="submit" name="digito" value="9"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" name="digito" value="0"></td>
+						<td></td></tr>
+				</table>
+			<br/>
+				<input type="submit" name="branco" value= "Branco" />
+				<input type="reset" name="corrigir" value="Corrige" />
+				<input type="submit" name="submit" value="Confirma" />
+			</form>
+		</center>
+</html>		
+<?php 
+if ($_GET['submit']<>""){
+$acao=$_GET['submit'];
+if ($acao<>""){
+if ($acao=='confirma'){	
+	$voto = $_SESSION['digito'];
+	class addVoto{
+		public $_Novo_voto;
+		function __construct($voto)	{
+			$this->_Novo_voto = $voto;
+		}
+		public function votar ($voto){
+			$arquivo = "votos1.txt";
+			$conteudo = $voto."\r\n";
+			$abertura = fopen("$arquivo","a+");
+			$gravacao = fwrite ($abertura,$conteudo);
+			fclose($abertura);
+			header("Location: index.php"); 	
+			}}};
+if ($acao=='branco'){
+	$voto = $_SESSION['digito'];
+	class addVoto{
+		public $_Novo_voto;
+		function __construct($voto)	{
+			$this->_Novo_voto = "branco";
+		}
+		public function votar ($voto){
+			$arquivo = "votos1.txt";
+			$conteudo = $voto."\r\n";
+			$abertura = fopen("$arquivo","a+");
+			$gravacao = fwrite ($abertura,$conteudo);
+			fclose($abertura);
+			}
+	}
+}
+}
+}
+?>
